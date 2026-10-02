@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <title>Moto Club — Wheelie</title>
+    <meta name="description" content="Petit jeu de wheelie low poly : dose les gaz et le frein pour tenir ta roue arrière le plus loin possible." />
+    <meta name="theme-color" content="#3d5a98" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Rubik:wght@400;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="game"></canvas>
+
+    <div id="hud" class="hidden">
+      <div class="hud-score">
+        <div class="score" id="score">0</div>
+        <div class="mult" id="mult"></div>
+      </div>
+      <div class="hud-stats">
+        <div><span id="dist">0</span><small> m</small></div>
+        <div><span id="speed">0</span><small> km/h</small></div>
+        <div class="best">Record <span id="best">0</span></div>
+      </div>
+
+      <div class="gauge-wrap">
+        <svg id="gauge" viewBox="34 0 186 128" aria-label="Angle de la moto">
+          <g id="gauge-zones"></g>
+          <line id="gauge-balance" x1="0" y1="0" x2="0" y2="0" />
+          <line id="gauge-needle" x1="110" y1="112" x2="200" y2="112" />
+          <circle cx="110" cy="112" r="6" class="gauge-hub" />
+          <text id="gauge-angle" x="72" y="120" text-anchor="middle">0°</text>
+        </svg>
+        <div class="bars">
+          <div class="bar"><i id="bar-gas"></i><span>Gaz</span></div>
+          <div class="bar brake"><i id="bar-brake"></i><span>Frein</span></div>
+        </div>
+      </div>
+
+      <div id="toast"></div>
+    </div>
+
+    <section id="screen-title" class="screen">
+      <div class="card">
+        <h1>Moto<br /><span>Club</span></h1>
+        <p class="tagline">Lève la roue. Tiens-la. Le plus loin possible.</p>
+        <ul class="howto">
+          <li><span class="kb-only"><kbd>Espace</kbd> / <kbd>↑</kbd> / clic</span><span class="touch-only">Bouton <b class="z2">Gaz</b></span> : <b>gaz</b> — l'avant se lève</li>
+          <li><span class="kb-only"><kbd>↓</kbd> / <kbd>S</kbd></span><span class="touch-only">Bouton <b class="z4">Frein</b></span> : <b>frein arrière</b> — l'avant redescend</li>
+          <li>Reste dans la zone <b class="z3">Parfait</b> pour enchaîner les combos.</li>
+          <li>Passé le point d'équilibre, c'est le <b class="z4">looping</b> : −50 %.</li>
+        </ul>
+        <button id="btn-start" class="btn">Rouler</button>
+        <p class="small">Record : <span id="title-best">0</span><span class="kb-only"> · <kbd>M</kbd> son</span></p>
+      </div>
+    </section>
+
+    <section id="screen-over" class="screen hidden">
+      <div class="card">
+        <h2 id="over-title">Fin du wheelie</h2>
+        <div class="final-score" id="over-score">0</div>
+        <div class="new-record hidden" id="over-record">Nouveau record !</div>
+        <dl class="recap">
+          <div><dt>Distance</dt><dd id="over-dist">0 m</dd></div>
+          <div><dt>Durée</dt><dd id="over-time">0 s</dd></div>
+          <div><dt>Vitesse max</dt><dd id="over-speed">0 km/h</dd></div>
+          <div><dt>Angle max</dt><dd id="over-angle">0°</dd></div>
+        </dl>
+        <p class="rank" id="over-rank"></p>
+        <button id="btn-retry" class="btn">Rejouer</button>
+        <p class="small kb-only"><kbd>Espace</kbd> ou <kbd>R</kbd> pour rejouer</p>
+      </div>
+    </section>
+
+    <div id="touch" class="hidden">
+      <button id="touch-brake" class="touch-btn brake">Frein</button>
+      <button id="touch-gas" class="touch-btn gas">Gaz</button>
+    </div>
+
+    <button id="btn-mute" class="icon-btn" aria-label="Couper le son">♪</button>
+
+    <noscript>Ce jeu a besoin de JavaScript.</noscript>
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "moto-club",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "npx serve -l 8080 .",
+    "test": "node --test"
+  }
+}
