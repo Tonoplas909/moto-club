@@ -57,10 +57,11 @@ npm test
 
 ## Publier sur GitHub Pages
 
-1. Pousser sur la branche `main`.
-2. Dans le dépôt GitHub : **Settings → Pages → Build and deployment**.
-3. Source : **Deploy from a branch**, branche `main`, dossier `/ (root)`.
-4. Le jeu sera en ligne sur `https://<utilisateur>.github.io/moto-club/` au bout d'une minute.
+Le jeu est en ligne sur **https://tonoplas909.github.io/moto-club/**.
+
+GitHub Pages sert la branche `gh-pages`. Il n'y a rien à faire à la main :
+à chaque push sur `main`, le workflow `.github/workflows/deploy.yml` lance les tests
+puis recopie `main` sur `gh-pages`, et le site se met à jour en une minute environ.
 
 ## Organisation du code
 
